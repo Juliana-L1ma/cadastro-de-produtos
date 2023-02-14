@@ -1,30 +1,58 @@
 class Produto{
-
+//construtor para colocar as informações dos produtos array 
     constructor(){
-        this.id = 0;
-        this.nomeProduto = '';
-        this.pesoDoProduto = 0;
-        this.valor = 0;
-
+        this.id = 1;
         this.arrayProdutos = [];
 
     }
 
-    adicionar(){
+    //depois de averiguado se certo os dados serão salvos e mandados para o array
+    salvar(){
      let produto = this.lerdados();
 
      if(this.validaCampo(produto)){
-        alert('salvar');
+        this.adicionar(produto);
      }
      
-     console.log(produto);
+     this.listaLabel();
        
     }
 
+    //cria linhas para cada novo produto adicionado
+    listaLabel(){
+        let tbody = document.getElementById('tbody');
+        tbody.innerText = '';
+
+        for (let i = 0; i < this.arrayProdutos.length; i++) {
+           let tr = tbody.insertRow();
+
+           let td_id = tr.insertCell();
+           let td_produto = tr.insertCell();
+           let td_pesoDoProduto = tr.insertCell();
+           let td_valor = tr.insertCell();
+           let td_acao = tr.insertCell();
+
+           //colocando as informações do array dentro das linhas
+           td_id.innerText = this.arrayProdutos[i].id;
+           td_produto.innerText = this.arrayProdutos[i].produto;
+           td_pesoDoProduto.innerText = this.arrayProdutos[i].pesoDoProduto;
+           td_valor.innerText = this.arrayProdutos[i].valor;
+        
+
+        }
+    }
+
+    //coloca a informação e vai adicionando mais id a cada informação colocada
+    adicionar(produto){
+         this.arrayProdutos.push(produto);
+         this.id++;
+    }
+
+     //averigua se os dados colocados pelo o usuário estão corretos, se estiver autoriza se não manda uma mensagem falando o que falta
     lerdados(){
         let produto = {}
        
-        produto.id = document.getElementById('id').value;
+        produto.id = this.id;
         produto.nomeProduto = document.getElementById('produto').value;
         produto.pesoDoProduto = document.getElementById('pesoDoProduto').value;
         produto.valor = document.getElementById('valor').value;
@@ -39,26 +67,32 @@ class Produto{
         return produto;
     }
 
+    //se algum campo ficar vazio manda um alerta para o usuário informando problema
     validaCampo(produto){
 
         let msg = '';
 
-        if(produto.id == ' '){
-            msg += ' - informe o ID do produto \n';
-        }
-        if(produto.nomeProduto == ' '){
+        if(produto.nomeProduto == ''){
             msg += ' - informe o nome do produto \n';
         }
-        if(produto.pesoDoProduto == ' '){
+        if(produto.pesoDoProduto == ''){
             msg += ' - informe o peso do produto \n';
         }
-        if(produto.valor == ' '){
+        if(produto.valor == ''){
             msg += ' - informe o valor do produto \n';
         }
+
+        if(msg != ''){
+            alert(msg);
+            return false
+        }
+
+        return true
     }
 
-    cancelar(){
-        alert("exxcluido com sucesso")
+    //funcão para excluir
+    excluir(){
+        alert("excluido com sucesso")
     }
 }
 
