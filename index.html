@@ -9,7 +9,8 @@
 </head>
 <body>
     <header>
-        <h1>Esquema de armazenamento de produtos em estoque</h1>
+        <h1>Esquema de armazenamento de produtos em estoque</h1><br>
+       
     </header>
 
     <main>
@@ -18,22 +19,27 @@
                 <h1>Controle de cadastro de produtos</h1>
     
                 <div class="lineInput">
-                    <label>Produto</label>
-                    <input type="text" id="produto">
+                    <label>Nome do Produto</label>
+                    <input type="text" id="nomeProduto">
                 </div>
     
                 <div class="lineInput">
-                    <label>Peso do produto</label>
+                    <label>Peso da peça</label>
                     <input type="text" id="pesoDoProduto">
                 </div>
+
+                <div class="lineInput">
+                    <label>Quantidade de peças</label>
+                    <input type="text" id="quantidade">
+                </div>
     
                 <div class="lineInput">
-                    <label>Valor</label>
+                    <label>Preço unitário</label>
                     <input type="text" id="valor">
                 </div>
     
                 <button onclick="produto.salvar()">Adicionar</button>
-                <button onclick="produto.excluir()">Cancelar</button>
+                <button onclick="produto.excluir()">Limpar</button>
             </div>
         </div>
 
@@ -41,9 +47,10 @@
             <table>
                 <thead>
                     <th>ID</th>
-                    <th>Produto</th>
-                    <th>Peso do produto</th>
-                    <th>Valor</th>
+                    <th>Nome do Produto</th>
+                    <th>Peso da peça</th>
+                    <th>Quantidade</th>
+                    <th>Preço unitário</th>
                     <th>Ações</th>
                 </thead>
 

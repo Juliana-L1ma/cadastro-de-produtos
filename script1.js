@@ -29,23 +29,39 @@ class Produto{
            let td_id = tr.insertCell();
            let td_produto = tr.insertCell();
            let td_pesoDoProduto = tr.insertCell();
+           let td_quantidade = tr.insertCell();
            let td_valor = tr.insertCell();
            let td_acao = tr.insertCell();
 
            //colocando as informações do array dentro das linhas
            td_id.innerText = this.arrayProdutos[i].id;
-           td_produto.innerText = this.arrayProdutos[i].produto;
+           td_produto.innerText = this.arrayProdutos[i].nomeProduto;
            td_pesoDoProduto.innerText = this.arrayProdutos[i].pesoDoProduto;
+           td_quantidade.innerText = this.arrayProdutos[i].quantidade;
            td_valor.innerText = this.arrayProdutos[i].valor;
         
+
+           
 
         }
     }
 
     //coloca a informação e vai adicionando mais id a cada informação colocada
     adicionar(produto){
-         this.arrayProdutos.push(produto);
-         this.id++;
+        if(produto.pesoDoProduto < 100){
+            alert('O produto deve ter mais de 100 kilos para ser cadastrado');
+            return false;
+        }
+        if(produto.nomeProduto.length < 3){
+            alert('O nome deve ter mais de 3 caracteres');
+        }
+        if(produto.quantidade < 10){
+            alert('Quantidade de peça inválida deve ter 10 ou mais para cadastrar');
+        }else{
+            this.arrayProdutos.push(produto);
+            this.id++;
+        }
+         
     }
 
      //averigua se os dados colocados pelo o usuário estão corretos, se estiver autoriza se não manda uma mensagem falando o que falta
@@ -53,16 +69,11 @@ class Produto{
         let produto = {}
        
         produto.id = this.id;
-        produto.nomeProduto = document.getElementById('produto').value;
+        produto.nomeProduto = document.getElementById('nomeProduto').value;
         produto.pesoDoProduto = document.getElementById('pesoDoProduto').value;
+        produto.quantidade = document.getElementById('quantidade').value;
         produto.valor = document.getElementById('valor').value;
-
-        if(produto.nomeProduto.length < 3){
-            alert('O nome deve ter mais de 3 caracteres');
-        }
-        if(produto.pesoDoProduto < 100){
-            alert('O produto deve ter mais de 100 kilos para ser cadastrado');
-        }
+        
 
         return produto;
     }
@@ -81,7 +92,9 @@ class Produto{
         if(produto.valor == ''){
             msg += ' - informe o valor do produto \n';
         }
-
+        if(produto.quantidade == ''){
+            msg += ' - informe a quantidade de peças \n';
+        }
         if(msg != ''){
             alert(msg);
             return false
